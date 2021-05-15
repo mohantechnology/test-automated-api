@@ -427,8 +427,11 @@ merge_all.addEventListener("click", (e) => {
                                 let res_data = JSON.parse(data);
                                 console.log(res_data);
                                 //  window.open(res_data.link,"_blank");
-                                window.open("/down/" + res_data.link, "_blank");
+                                // window.open("/down/" + res_data.link, "_blank");
                                 merge_all.textContent = "Merge All";
+                               let curr_link_elem =     document.createElement("a"); 
+                               curr_link_elem.href = "/down/" + res_data.link; 
+                               curr_link_elem.click(); 
 
                                 //   let  link_elem = document.createElement("a"); 
                                 //   link_elem.href="/down/"+res_data.link; 

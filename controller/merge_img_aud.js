@@ -79,7 +79,7 @@ console.log("type of duration + ",duration , Number (duration) );
 var images = [
   {
     path: img_file_path,
-    caption: "this video  is created using videoshow",
+    caption: "write you notes here ...",
     loop: (parseInt(duration)/1000)+1
   }
 ];
