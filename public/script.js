@@ -539,7 +539,9 @@ merge_all.addEventListener("click", (e) => {
 
 });
 
-
+clear_all.addEventListener("click", (e) => {
+      window.location.href=location.href; 
+}); 
 function send_file_to_server(file, prog_id, f_type, target_id) {
 
     let file_type;
