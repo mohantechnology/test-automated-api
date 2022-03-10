@@ -28,6 +28,8 @@ var merge_all = require('./controller/merge_all');
 // var merge_img_aud = require('./controller/merge_img_aud');
 
 
+ 
+var text_file_to_audio = require('./controller/text_file_to_audio');
 
 
 const { v4: uuidv4 } = require('uuid');
@@ -1069,6 +1071,115 @@ app.get('/con3', (req, res) => {
 
 
 
+// ############# Assignment Api ###################
+
+// upload file 
+app.post('/upload_file', (req, res) => {
+  try{ 
+
+    let up_file;
+    let file_path = uuidv4()  ; 
+    let token = req.body.token ? req.body.token.trim(): undefined; 
+    // req.files.upload_file.data=null; 
+    // res.json( {status:"ok"  , message: req.body,file_detail: req.files }); 
+    // if file is present then  update the file in database also and delete prev file 
+
+    // if( !token){ 
+    //   return  res.status(400).json({ status: "error", message: "Missing Field 'token'" });
+    // }
+    if (req.files && req.files.my_file) {
+  
+
+      console.log(req.body);
+      console.log(req.params);
+      console.log(req.files);
+      console.log(req.query);
+      // return; 
+      req.params.f_id = req.query.f_id;
+      console.log(req.params);
+       
+   
+  
+  
+      let sampleFile = req.files.my_file;
+  
+      let s_arr = basename(sampleFile.name).split('.');
+      let extn = s_arr[s_arr.length - 1];
+  
+      if( extn !=="mp4" && extn !=="mp3"&& extn !=="txt" &&extn !=="jpg" &&extn !=="jpeg" &&extn !=="png" ){ 
+        return res.status(400).json({ status: "error", message: "File extension must be either 'mp4', 'mp3','txt' 'jpg', 'jpeg', 'png'  " });
+      }
+      let org_name = file_path+"."+extn; 
+  
+  
+      console.log("splitted file ext ");
+  
+  
+      //create folder if not exist 
+      let path_link = __dirname + `/public/upload/`;
+      // let path_link =__dirname + `/upload_file`;
+  
+      if (!fs.existsSync(__dirname + `/public`)) {
+        console.log("creating dir " + __dirname + `/public`)
+        fs.mkdirSync(__dirname + `/public`);
+      }
+      if (!fs.existsSync(__dirname + `/public/upload`)) {
+        fs.mkdirSync(__dirname + `/public/upload`);
+        console.log("creating dir " + __dirname + `/public/upload`)
+      }
+  
+      if (!fs.existsSync(path_link)) {
+        fs.mkdirSync(path_link);
+        console.log("creating dir " + path_link)
+      }
+      else {
+        console.log("already created dir " + path_link)
+      }
+      sampleFile.mv(path_link + "/" + org_name, function (err) {
+        if (err) {
+          console.log("erro is: ", err.message)
+          res.status(400).json({ status: "error", message: err.message });
+        }
+        else {
+          res.status(200).json({ status: "ok", file_path:   "public/upload/" + org_name  ,});
+        }
+  
+      });
+  
+  
+    } else {
+   return    res.status(400).json({ status: "error", message: "File is not upload successfully.Send File Again" });
+    }
+  
+
+  }
+  catch(err ){ 
+    res.status(500).json({
+      message : "something went wrong" ,
+      error: err
+    })
+  }
+ 
+})
+
+
+// convert text file to audio 
+app.post('/text_file_to_audio', (req, res) => {
+
+
+ 
+  
+  text_file_to_audio(req.body)
+    .then(data => {
+      console.log(data);
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    })
+
+});
 
 
 
