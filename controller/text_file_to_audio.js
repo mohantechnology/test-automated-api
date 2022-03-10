@@ -42,8 +42,8 @@ function main(data) {
                 var speech = data;
               
                 try {
-                       console.log( "above getts")
-                    console.log( gTTS)
+                       console.log( "above")
+                    console.log( gtts)
                     var gtts = new gTTS(speech, 'en');
                     console.log( "gtts")
                     console.log( gtts)
