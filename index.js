@@ -15,7 +15,10 @@ const fileUpload = require('express-fileupload');
 const { basename } = require('path');
 var port = process.env.PORT || 3000;
 
-
+var cors = require('cors')
+ 
+app.use(cors())
+ 
 
 var txt_to_voice = require('./controller/txt_to_voice');
 var merge_img_aud = require('./controller/merge_img_aud');
