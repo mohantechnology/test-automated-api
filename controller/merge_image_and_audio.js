@@ -59,7 +59,7 @@ function main(data) {
         let img_file_path = __dirname + "/../"+ image_file_path ; 
         let voice_file_path = __dirname + "/../" + audio_file_path; 
 
-        let video_short_path =  "public/upload/"+ uuidv4()+ "_voice"+ ".mp4";
+        let video_short_path =  "public/upload/"+ uuidv4() + ".mp4";
 
        let new_vid_file_path = __dirname + "/../" + video_short_path
 

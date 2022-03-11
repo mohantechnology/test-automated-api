@@ -14,6 +14,7 @@ const login = require(__dirname + "/" + model_folder + '/login');
 const fileUpload = require('express-fileupload');
 const { basename } = require('path');
 var port = process.env.PORT || 3000;
+const path = require('path');
 
 var cors = require('cors')
  
@@ -31,6 +32,8 @@ var merge_all = require('./controller/merge_all');
  // #### Api  function ####
 var text_file_to_audio = require('./controller/text_file_to_audio');
 var merge_image_and_audio = require('./controller/merge_image_and_audio');
+var merge_video_and_audio = require('./controller/merge_video_and_audio');
+var merge_all_video = require('./controller/merge_all_video');
  
 
 const { v4: uuidv4 } = require('uuid');
@@ -1197,6 +1200,85 @@ app.post('/merge_image_and_audio', (req, res) => {
 });
 
 
+// Merge Video + Audio  file to Video 
+app.post('/merge_video_and_audio', (req, res) => {
+
+  merge_video_and_audio(req.body)
+    .then(data => {
+      console.log(data);
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json(err)
+    })
+
+});
+
+
+// Merge All Video files 
+app.post('/merge_all_video', (req, res) => {
+
+  merge_all_video(req.body)
+    .then(data => {
+      console.log(data);
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json(err)
+    })
+
+});
+
+
+app.get('/download_file', (req, res) => {
+
+  try { 
+    let data = req.query; 
+    console.log( data); 
+    if ((!data) || !(data.file_path) )   {
+      return  res.status(400).json({ status: "error", message: "  Field 'file_path" });
+
+  }
+ 
+
+let extn = data.file_path.split(".").pop(); 
+// if( extn !=="txt"){ 
+// return res.status(400).json({ status: "error", message: "'file_path'   must be a text file  with  file extension 'txt' " });
+// }
+ 
+ let temp_file_path = data.file_path; 
+  let file_path = path.resolve( __dirname + "/" +temp_file_path ); 
+  let upload_dir_path =  path.resolve(__dirname + "/public/upload"); 
+  console.log("file_path" )
+  console.log(file_path )
+  console.log("upload_dir_path" )
+  console.log(upload_dir_path )
+  console.log(file_path.startsWith(upload_dir_path )); 
+  if (!file_path.startsWith(upload_dir_path)) {
+    return res.status(403).json({ status: "error", message: "You  do not have access to donwload this  file" });
+
+}
+
+ let file_name = data.file_path.split("/").pop() ; 
+  console.log(file_path);
+  if (!fs.existsSync(file_path)) {
+      return res.status(404).json({ status: "error", message: "File Not Exist" });
+
+  }
+
+   return res.download( file_path,file_name); 
+
+
+  }
+  catch ( err){ 
+    console.log( err); 
+    res.status(500).json({ status: "error", message: "something went wrong" , error : err});
+    
+  }
+
+});
 
 
 
@@ -1204,14 +1286,13 @@ app.post('/merge_image_and_audio', (req, res) => {
 
 
 
-
-
-app.post("/*", (req, res) => {
-  res.status(404).send({ "status": "error", message: "page not found from 1" })
-})
 
 app.get("/*", (req, res) => {
-  res.status(404).send({ "status": "error", message: "page not found from 1" })
+  res.status(404).send({ "status": "error", message: "'GET' Route Not Exist" })
+})
+
+app.post("/*", (req, res) => {
+  res.status(404).send({ "status": "error",message: "'POST' Route Not Exist" })
 })
 
 

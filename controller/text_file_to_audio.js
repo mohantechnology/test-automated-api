@@ -20,7 +20,7 @@ function main(data) {
   if( extn !=="txt"){ 
     return reject({ status: "error", message: "'file_path'   must be a text file  with  file extension 'txt' " });
   }
-            let voice_short_path =  "public/upload/"+ uuidv4()+ "_voice"+ ".mp3";
+            let voice_short_path =  "public/upload/"+ uuidv4()+ ".mp3";
             let file_path = __dirname + "/../" +data.file_path
             // let voice_file_path = __dirname + "/../" +voice_short_path; 
             let voice_file_path = __dirname + "/../" +voice_short_path; 
