@@ -138,30 +138,6 @@ function pr(r1, r2, r3, r4) {
 
 
 
-app.get('/down/:file_path', (req, res) => {
-
-  // res.json( {status:"ok"  , message: req.body}); 
-
-
-
-  if ((!req.params.file_path) || !(req.cookies.li)) {
-    return res.json({ status: "error", message: "Missing data" });
-
-  }
-  let file_path = __dirname + "/public/upload/" + req.cookies.li + "/" + req.params.file_path;
-  console.log(file_path);
-  if (!fs.existsSync(file_path)) {
-    return res.json({ status: "error", message: "File Not Found" });
-
-  }
-  res.download(file_path)
-});
-
-
-// console.log(__dirname + `/public/upload/${3434}`);
-console.log(__dirname);
-
-
 app.get('/', (req, res) => {
 
   // res.json( {status:"ok"  , message: req.body}); 
@@ -205,9 +181,37 @@ app.get('/', (req, res) => {
     console.log("already created dir " + path_link)
   }
 
-
-  res.sendFile(__dirname + "/index.html")
+  res.json({status:"ok", message: "connected to api successfully"})
+  // res.sendFile(__dirname + "/index.html")
 });
+
+/*
+
+app.get('/down/:file_path', (req, res) => {
+
+  // res.json( {status:"ok"  , message: req.body}); 
+
+
+
+  if ((!req.params.file_path) || !(req.cookies.li)) {
+    return res.json({ status: "error", message: "Missing data" });
+
+  }
+  let file_path = __dirname + "/public/upload/" + req.cookies.li + "/" + req.params.file_path;
+  console.log(file_path);
+  if (!fs.existsSync(file_path)) {
+    return res.json({ status: "error", message: "File Not Found" });
+
+  }
+  res.download(file_path)
+});
+
+
+
+// console.log(__dirname + `/public/upload/${3434}`);
+console.log(__dirname);
+
+
 
 
 
@@ -1055,7 +1059,7 @@ app.get('/con3', (req, res) => {
 
 
 
-
+*/
 
 // const os = require('os');
 
