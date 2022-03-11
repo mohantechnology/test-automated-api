@@ -23,8 +23,8 @@
     "videoshow": "^0.1.12"
   },
   "engines" : { 
-    "npm" : ">=7.0.0",
-    "node" : ">=16.0.0"
+    "node": "14.17.0",
+    "npm": "6.14.13"
   },
   "devDependencies": {},
   "scripts": {
