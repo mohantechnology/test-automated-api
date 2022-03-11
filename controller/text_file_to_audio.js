@@ -16,8 +16,11 @@ function main(data) {
     
             }
           
- 
-            let voice_short_path =  uuidv4()+ "_voice"+ ".mp3";
+  let extn = data.file_path.split(".").pop(); 
+  if( extn !=="txt"){ 
+    return reject({ status: "error", message: "'file_path'   must be a text file  with  file extension 'txt' " });
+  }
+            let voice_short_path =  "public/upload/"+ uuidv4()+ "_voice"+ ".mp3";
             let file_path = __dirname + "/../" +data.file_path
             // let voice_file_path = __dirname + "/../" +voice_short_path; 
             let voice_file_path = __dirname + "/../" +voice_short_path; 
@@ -54,7 +57,7 @@ function main(data) {
                         console.log( "result")
                         console.log( result)
                         console.log("Text to speech converted!\n", voice_file_path);
-                        return resolve({ status: "ok", message: "text to speech converted", link: "public/upload/" + token + "/" + s_arr[0] + "_voice_" + s_arr[2] + ".mp3" });
+                        return resolve({ status: "ok", message: "text to speech converted",  audio_file_path: voice_short_path });
                     });
                 } catch (error) {
                     return reject({ status: "error", message: err });

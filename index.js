@@ -28,9 +28,10 @@ var merge_all = require('./controller/merge_all');
 // var merge_img_aud = require('./controller/merge_img_aud');
 
 
- 
+ // #### Api  function ####
 var text_file_to_audio = require('./controller/text_file_to_audio');
-
+var merge_image_and_audio = require('./controller/merge_image_and_audio');
+ 
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -1166,9 +1167,6 @@ app.post('/upload_file', (req, res) => {
 // convert text file to audio 
 app.post('/text_file_to_audio', (req, res) => {
 
-
- 
-  
   text_file_to_audio(req.body)
     .then(data => {
       console.log(data);
@@ -1176,11 +1174,27 @@ app.post('/text_file_to_audio', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json(err)
+      res.status(400).json(err)
     })
 
 });
 
+
+
+// convert Image + Audio  file to Video 
+app.post('/merge_image_and_audio', (req, res) => {
+
+  merge_image_and_audio(req.body)
+    .then(data => {
+      console.log(data);
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json(err)
+    })
+
+});
 
 
 
