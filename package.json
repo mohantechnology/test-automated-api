@@ -22,6 +22,10 @@
     "video-stitch": "^1.7.1",
     "videoshow": "^0.1.12"
   },
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
