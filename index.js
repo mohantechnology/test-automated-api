@@ -1289,6 +1289,25 @@ let extn = data.file_path.split(".").pop();
 
 
 
+app.get('/all_upload_file', (req, res) => {
+
+  try { 
+  let upload_dir_path =  path.resolve(__dirname + "/public/upload"); 
+
+    let file_list  =fs.readdirSync(upload_dir_path)
+  
+  
+  return res.status(200).json({ status: "ok"  , data : file_list });
+
+
+  }
+  catch ( err){ 
+    console.log( err); 
+    res.status(500).json({ status: "error", message: "something went wrong" , error : err});
+    
+  }
+
+});
 
 
 
