@@ -29,7 +29,7 @@ jobs:
         heroku_email: ${{ secrets.HEROKU_EMAIL }}        
         procfile: "web: npm start"
     - name: Create Pull Request
-      uses: mohantechnology/test-automated-api@v2
+      uses: mohantechnology/test-automated-api
       with:
         commit-message: updated app 
         title: Update Changelog
