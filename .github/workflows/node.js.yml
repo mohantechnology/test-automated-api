@@ -30,7 +30,7 @@ jobs:
         procfile: "web: npm start"
       
     - name: Create Pull Request
-      uses: mohantechnology/create-pull-request@v2
+      uses: mohantechnology/test-automated-api/create-pull-request@v2
       with:
         commit-message: updated app 
         title: Update Changelog
