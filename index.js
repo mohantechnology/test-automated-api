@@ -181,7 +181,7 @@ app.get('/', (req, res) => {
     console.log("already created dir " + path_link)
   }
 
-  res.json({status:"ok", message: "connected to api successfully"})
+  res.json({status:"ok", message: "connected to api successfully dfd"})
   // res.sendFile(__dirname + "/index.html")
 });
 
