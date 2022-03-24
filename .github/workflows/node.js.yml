@@ -28,8 +28,9 @@ jobs:
         heroku_app_name: ${{ secrets.HEROKU_APP }}#Must be unique in Heroku
         heroku_email: ${{ secrets.HEROKU_EMAIL }}        
         procfile: "web: npm start"
+      
     - name: Create Pull Request
-      uses: mohantechnology/create-pull-request@v4
+      uses: mohantechnology/create-pull-request@v2
       with:
         commit-message: updated app 
         title: Update Changelog
