@@ -31,7 +31,7 @@ jobs:
      
  
     - name: Test pull request
-      run:  hub pull-request --base OWNER:master --head MYUSER:my-branch
+      run:  hub pull-request --base OWNER:main --head MYUSER:my-branch
       id: random-color-generator
      
      
