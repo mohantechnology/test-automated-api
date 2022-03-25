@@ -43,7 +43,7 @@ jobs:
           body:
            Review app will be availabe at https://${{ secrets.HEROKU_APP }}.herokuapp.com
           token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
+#           delete-branch: true
 
 
 
