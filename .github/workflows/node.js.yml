@@ -36,7 +36,7 @@ jobs:
     - name: Create Pull Request
 #       uses: mohantechnology/www
 #     - name: Create Pull Request
-      uses: mohantechnology/test-automated-api@v4
+      uses: mohantechnology/www@v4
       with:
         commit-message: updated app 
         title: Update Changelog
