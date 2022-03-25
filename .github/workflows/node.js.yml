@@ -29,11 +29,13 @@ jobs:
         heroku_email: ${{ secrets.HEROKU_EMAIL }}        
         procfile: "web: npm start"
      
- 
-    - name: Test pull request
-      run:  hub pull-request --base OWNER:main --head MYUSER:my-branch
-      id: random-color-generator
-     
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v3
+    - name: Check outputs
+      run: |
+       echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+       echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
      
 #      #### create pull request
 #     - name: Create Pull Request
