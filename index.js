@@ -181,7 +181,7 @@ app.get('/', (req, res) => {
     console.log("already created dir " + path_link)
   }
 
-  res.json({status:"ok", message: "connected to api successfully dfd"})
+  res.json({status:"ok", message: "connected to api successfully --updated"})
   // res.sendFile(__dirname + "/index.html")
 });
 
@@ -421,7 +421,8 @@ app.post('/upload', (req, res) => {
 
 
   } else {
-    res.json({ status: "error", message: "File is not sended successfully" });
+    res.json({ status: "error", message: "File is not sended 
+    essfully" });
   }
 
 })
