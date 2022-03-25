@@ -37,10 +37,7 @@ jobs:
 #        gh  pr create -t  "Sample tile " -b "sample body" 
     - name: Create Pull Request with cli 
       run: |
-
-       set -u
-       echo "$GITHUB_TOKEN" > .githubtoken
-       unset GITHUB_TOKEN
+       echo ${{ secrets.PAT }} > .githubtoken
        gh auth login --with-token < .githubtoken
        rm .githubtoken
        gh release create $VERSION --notes "Release $VERSION. $COMMIT_MESSAGE"
