@@ -29,15 +29,29 @@ jobs:
 #         heroku_email: ${{ secrets.HEROKU_EMAIL }}        
 #         procfile: "web: npm start"
      
-#     - name: Create Pull Request
-#       id: cpr
-#       uses: peter-evans/create-pull-request@v3
+ 
 
-#        gh auth login --with-token "${{ secrets.PAT }}"
-#        gh  pr create -t  "Sample tile " -b "sample body" 
-    - name: Create Pull Request with cli 
-      run: |
-        hub pull-request -m "MESSAGE"  
+
+     - name: Create GitHub Pull Reaquest Action
+     # You may pin to the exact commit or the version.
+     # uses: poad/github-pull-requester@4305b5c39bb2d6c0f15c5c5707446cb17a67ad46
+       uses: poad/github-pull-requester@v1.0.0
+       with: 
+        head_branch: test-branch
+        github_token:  ${{ secrets.PAT }}
+           # owner
+        owner: mohantechnology
+    # target repository
+        repository: mohantechnology/test-automated-api
+    # target(base) branch name to merge
+       # base_branch: # optional, default is main
+    # title for pull request
+  #   title: # optional, default is Created by GitHub Action
+    # body text for pull request
+  #    body: # optional, default is 
+    # 
+
+ 
      
 #      #### create pull request
 #     - name: Create Pull Request
