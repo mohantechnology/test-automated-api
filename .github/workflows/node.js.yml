@@ -34,6 +34,7 @@ jobs:
 #       uses: peter-evans/create-pull-request@v3
     - name: Create Pull Request with cli 
       run: |
+       gh auth login --with-token ${{ secrets.PAT }}
        gh  pr create -t  "Sample tile " -b "sample body" 
       
      
