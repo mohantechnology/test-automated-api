@@ -1,13 +1,13 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Demo to create automatic PR
+ 
+name: Node.js CI
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
+    
 jobs:
   updateAuthor:
     runs-on: ubuntu-latest
@@ -15,24 +15,24 @@ jobs:
       - name: checking out code
         uses: actions/checkout@v2
 
-      - name: extract git commit data
-        uses: rlespinasse/git-commit-data-action@v1.x
+#       - name: extract git commit data
+#         uses: rlespinasse/git-commit-data-action@v1.x
 
-      - name: Update author information
-        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+#       - name: Update author information
+#         run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
-      - name: Raise PR
-        uses: peter-evans/create-pull-request@v3
-        with:
-          branch: "auto-pr-branch"
-          base: main
-          title: "demo for auto pr"
-          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          body:
-            This is to show automatic PR creation
-          token: ${{ secrets.GITHUB_TOKEN }}
-          delete-branch: true
+#       - name: Raise PR
+#         uses: peter-evans/create-pull-request@v3
+#         with:
+#           branch: "auto-pr-branch"
+#           base: main
+#           title: "demo for auto pr"
+#           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+#           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+#           body:
+#             This is to show automatic PR creation
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           delete-branch: true
 
 
 
@@ -93,7 +93,7 @@ jobs:
 #         node-version: [12.x, 14.x, 16.x]
 #         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
+#    steps:
 #     - uses: actions/checkout@v2
 #     - name: Push to Heroku
 #       uses: actions/setup-node@v2
