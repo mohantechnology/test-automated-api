@@ -6,11 +6,41 @@ name: Node.js CI
 on:
   push:
     branches: [ main ]
-
+    
+    
 jobs:
-  build:
-
+  updateAuthor:
     runs-on: ubuntu-latest
+    steps:
+      - name: checking out code
+        uses: actions/checkout@v2
+
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1.x
+
+      - name: Update author information
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+
+      - name: Raise PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: "auto-pr-branch"
+          base: main
+          title: "demo for auto pr"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body:
+            This is to show automatic PR creation
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
+
+
+
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
 
 #     strategy:
 #       matrix:
@@ -32,24 +62,24 @@ jobs:
  
 
 
-     - name: Create GitHub Pull Reaquest Action
-     # You may pin to the exact commit or the version.
-     # uses: poad/github-pull-requester@4305b5c39bb2d6c0f15c5c5707446cb17a67ad46
-       uses: poad/github-pull-requester@v1.0.0
-       with: 
-        head_branch: test-branch
-        github_token:  ${{ secrets.PAT }}
-           # owner
-        owner: mohantechnology
-    # target repository
-        repository: mohantechnology/test-automated-api
-    # target(base) branch name to merge
-       # base_branch: # optional, default is main
-    # title for pull request
-  #   title: # optional, default is Created by GitHub Action
-    # body text for pull request
-  #    body: # optional, default is 
-    # 
+#      - name: Create GitHub Pull Reaquest Action
+#      # You may pin to the exact commit or the version.
+#      # uses: poad/github-pull-requester@4305b5c39bb2d6c0f15c5c5707446cb17a67ad46
+#        uses: poad/github-pull-requester@v1.0.0
+#        with: 
+#         head_branch: test-branch
+#         github_token:  ${{ secrets.PAT }}
+#            # owner
+#         owner: mohantechnology
+#     # target repository
+#         repository: mohantechnology/test-automated-api
+#     # target(base) branch name to merge
+#        # base_branch: # optional, default is main
+#     # title for pull request
+#   #   title: # optional, default is Created by GitHub Action
+#     # body text for pull request
+#   #    body: # optional, default is 
+#     # 
 
  
      
