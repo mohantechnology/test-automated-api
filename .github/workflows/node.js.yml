@@ -34,14 +34,15 @@ jobs:
       # Make changes to pull request here
     - uses: actions/checkout@v3
     - name: Create Pull Request
-      uses: mohantechnology/test-automated-api@v4
+#       uses: mohantechnology/www
 #     - name: Create Pull Request
-#       uses: mohantechnology/test-automated-api/create-pull-request@v2
-#       with:
-#         commit-message: updated app 
-#         title: Update Changelog
+      uses: peter-evans/create-pull-request@v4
+      with:
+        commit-message: updated app 
+        title: Update Changelog
 #         body: please preview the app at https://${{ secrets.HEROKU_APP }}.herokuapp.com  
-#         branch: update-changelog
-#         base: main
+        body:  sample body
+        branch: update-changelog
+        base: main
 # buildpack: "https://github.com/HashNuke/heroku-buildpack-elixir.git"
    
