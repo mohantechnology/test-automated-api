@@ -32,11 +32,18 @@ jobs:
 #     - name: Create Pull Request
 #       id: cpr
 #       uses: peter-evans/create-pull-request@v3
+
+#        gh auth login --with-token "${{ secrets.PAT }}"
+#        gh  pr create -t  "Sample tile " -b "sample body" 
     - name: Create Pull Request with cli 
       run: |
-       gh auth login --with-token "${{ secrets.PAT }}"
-       gh  pr create -t  "Sample tile " -b "sample body" 
-      
+
+       set -u
+       echo "$GITHUB_TOKEN" > .githubtoken
+       unset GITHUB_TOKEN
+       gh auth login --with-token < .githubtoken
+       rm .githubtoken
+       gh release create $VERSION --notes "Release $VERSION. $COMMIT_MESSAGE"
      
 #      #### create pull request
 #     - name: Create Pull Request
