@@ -38,7 +38,7 @@ jobs:
     - name: Create Pull Request with cli 
       run: |
    
-       gh auth login --with-token < echo ${{ secrets.PAT }} 
+       gh auth login --with-token  ${{ secrets.PAT }} 
        rm .githubtoken
        gh release create $VERSION --notes "Release $VERSION. $COMMIT_MESSAGE"
      
